@@ -4,21 +4,21 @@ class MailService {
 
     constructor() {
         this.transporter = nodeMailer.createTransport({
-            host: process.env.SNTP__HOST,
-            port: process.env.SNTP__PORT,
+            host: process.env.SNTP_HOST,
+            port: process.env.SNTP_PORT,
             secure: false,
             auth: {
-                user: process.env.SNTP__USER,
-                pass: process.env.SNTP__PASSWORD
+                user: process.env.SNTP_USER,
+                pass: process.env.SNTP_PASSWORD
             }
         })
-    }
+    };
 
     async sendActivationMail(to, link) {
         await this.transporter.sendMail({
-            from: process.env.SNTP__USER,
+            from: process.env.SNTP_USER,
             to,
-            subject: 'Активация аккаунта на ' + process.env.API__URL,
+            subject: 'Активация аккаунта на ' + process.env.API_URL,
             text: '',
             html:
                 `
@@ -27,8 +27,8 @@ class MailService {
                     <a href='${link}'>${link}</a>
                 </div>
                 `
-        })
-    }
-}
+        });
+    };
+};
 
 module.exports = new MailService();
